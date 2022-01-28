@@ -326,7 +326,7 @@ button {
   border: none;
   padding: .3rem .75rem;
 }
-.copy-button__icon {
+.copy__btn__icon {
   width: 2rem;
 }
 #letters {

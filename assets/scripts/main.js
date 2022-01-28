@@ -1,48 +1,40 @@
-if ('serviceWorker' in navigator) {
-  console.log("requested");
-  navigator.serviceWorker.register("sw.js");
-}
+// Declarations
+const inputs = document.querySelectorAll(".prefix, .suffix"),
+  baseNumberInput = document.querySelector("#base__number"),
+  randomCharsInput = document.querySelector("#random__characters"),
+  includeLetters = document.querySelector("#letters");
+let hideCopy, hideError;
+
+// Registering sw.js as Service Worker
+if ('serviceWorker' in navigator) navigator.serviceWorker.register("sw.js");
+
+// Hiding Preloader on load
 document.body.onload = () => document.body.classList.add("loaded");
+// Adding Current Year to Footer
 document.querySelector(".current__year").textContent = new Date().getFullYear();
 AOS.init();
-let hideCopy, hideError;
-const inputs = document.querySelectorAll(".prefix, .suffix"),
-    baseNumberInput = document.querySelector("#base__number"),
-    randomCharsInput = document.querySelector("#random__characters"),
-    includeLetters = document.querySelector("#letters");
+// Populating all Fields from Localstorage if available
 populateFields();
+randomCharsInput.onchange = (e) => validate(e);
+includeLetters.onchange = updateRandomCharacters;
+// Looping through each Input
 for (i = 0; i < inputs.length; i++) {
-    updateValues(inputs[i], Array.from(inputs[i].classList))
+    // Updating Output with current Values
+    updateValues(inputs[i], Array.from(inputs[i].classList));
+
+    // Validating Inputs and Updating Output on any further change to the Inputs
     inputs[i].onkeyup = inputs[i].onkeydown = inputs[i].onchange = (e) => {
         e.target.value = e.target.value.toUpperCase();
         validate(e);
         updateValues(e.target, Array.from(e.target.classList));
     }
 }
-function validate(e) {
-  if (e.target.value.length >= 10 && (e.target.classList.contains("suffix") || e.target.classList.contains("prefix"))) {
-    return showError("Maximum Length can be 10", e.target)
-  }
-  if ((e.target.value > 30 || e.target.value < 0) && e.target.type === "number" && e.target.id === "random__characters") {
-    showError("Random Characters can be between 0-30", e.target);
-    e.target.value = e.target.value > 30 ? 30 : 0;
-    if (document.querySelector("#generate__random .output__number").textContent.length !== +e.target.value) {
-      updateRandomCharacters();
-    }
-  } else if (e.target.id === "random__characters"){
-    updateRandomCharacters();
-  }
-  if (e.target.id === "base__number") {
-    e.target.value = e.target.value.replace(/[^0-9]/g, "");
-  }
-  updateWebStorage();
-}
+
 function updateTime() {
     let time = `${Date.now()}`.substring(0, 10);
     document.querySelector("#time__output .output__number").textContent = time;
 }
-randomCharsInput.onchange = (e) => {validate(e);};
-includeLetters.onchange = updateRandomCharacters;
+
 
 setInterval(updateTime, 1000);
 
@@ -80,24 +72,14 @@ function incrementBaseNumber() {
 baseNumberInput.onchange = (e) =>  {validate(e);updateBaseNumber(); };
 updateBaseNumber();
 updateRandomCharacters();
-function generateRandomAlphanumerics(length) {
-  const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    alphabets = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",];
-  let result = "",
-    options = [...numbers];
-  if (includeLetters.checked)
-    options = [...numbers, ...alphabets]
-  for (i=0;i<length;i++) {
-    result += options[parseInt(Math.random() * options.length)];
-  }
-  return result;
-}
+
 function funFact() {
   nCharacters = document.querySelector("#random__characters").value;
   if (nCharacters <= 0 || !nCharacters) {
     includeLetters.disabled = true;
     return document.querySelector("main").classList.add("digitsDisabled");
   }
+  document.querySelector(".if__letters").textContent = includeLetters.checked ? " and letters" : "";
   includeLetters.disabled = false;
   document.querySelector("main").classList.remove("digitsDisabled");
   document.querySelector(".fun__character__count").textContent = nCharacters;
@@ -109,6 +91,8 @@ function funFact() {
 }
 
 funFact();
+
+// Utility Functions
 function reset(e) {
     e.querySelector(".prefix").value = '';
     e.querySelector(".suffix").value = '';
@@ -146,6 +130,37 @@ function copyToClipboard(button) {
     `
     updateWebStorage();
   } 
+}
+
+function validate(e) {
+  if (e.target.value.length >= 10 && (e.target.classList.contains("suffix") || e.target.classList.contains("prefix"))) {
+    return showError("Maximum Length can be 10", e.target)
+  }
+  if ((e.target.value > 30 || e.target.value < 0) && e.target.type === "number" && e.target.id === "random__characters") {
+    showError("Random Characters can be between 0-30", e.target);
+    e.target.value = e.target.value > 30 ? 30 : 0;
+    if (document.querySelector("#generate__random .output__number").textContent.length !== +e.target.value) {
+      updateRandomCharacters();
+    }
+  } else if (e.target.id === "random__characters"){
+    updateRandomCharacters();
+  }
+  if (e.target.id === "base__number") {
+    e.target.value = e.target.value.replace(/[^0-9]/g, "");
+  }
+  updateWebStorage();
+}
+function generateRandomAlphanumerics(length) {
+  const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    alphabets = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",];
+  let result = "",
+    options = [...numbers];
+  if (includeLetters.checked)
+    options = [...numbers, ...alphabets]
+  for (i=0;i<length;i++) {
+    result += options[parseInt(Math.random() * options.length)];
+  }
+  return result;
 }
 function updateWebStorage() {
   values = {

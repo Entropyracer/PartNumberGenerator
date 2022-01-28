@@ -6,8 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Welcome to PartNumberGenerator.com, an easy way for your entire team to generate unique numbers for your files. Everybody in your team can use this tool without worrying about duplicating a file name. ">
+    <meta name="description" content="Welcome to PartNumberGenerator.com, an easy way for your entire team to generate unique numbers for your files. Everybody in your team can use this tool without worrying about duplicating a file name. ">
     <meta name="keywords" content="Engineering, Manufacturing, CAD, Solidworks, ProE, PartNumberGenerator">
     <meta name="robots" content="index, follow">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -21,7 +20,8 @@
     <link rel="mask-icon" href="assets/img/favicon/safari-pinned-tab.svg" color="#3455fd">
     <meta name="msapplication-TileColor" content="#3455fd">
     <meta name="theme-color" content="#3455fd">
-    <link rel="manifest" href="manifest.json">
+    <!-- Web Manifest File -->
+    <link rel="manifest" href="manifest.webmanifest">
     <!-- Animate On Scroll CDN -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
@@ -32,6 +32,7 @@
 </head>
 
 <body>
+    <!-- Preloader - Hidden when DOM Content Loaded -->
     <section id="preloader">
         <img class="preloader__image" src="assets/img/favicon/android-chrome-512x512.png" alt="PartNumberGenerator Logo">
         <div class="preloader__container">
@@ -41,16 +42,29 @@
             <span class="preloader__circle"></span>
         </div>
     </section>
-    <section id="hero">
+
+    <!-- Hero Section -->
+    <header id="hero">
         <div id="hero__content" data-aos="fade-right" data-aos-duration="800" data-aos-delay="800">
-            <h1 id="hero__heading">Welcome to <br> PartNumberGenerator<span class="color--light">.com</span></h1>
-            <p id="hero__tagline" data-aos="fade-down" data-aos-duration="800" data-aos-delay="1000">Simplifying your CAD Workflow!</p>
+            <h1 id="hero__heading">
+                Welcome to <br> PartNumberGenerator
+                <span class="color--light">.com</span>
+            </h1>
+            <p id="hero__tagline" data-aos="fade-down" data-aos-duration="800" data-aos-delay="1000">
+                Simplifying your CAD Workflow!
+            </p>
         </div>
         <img id="hero__illustration" data-aos="fade-left" data-aos-duration="800" data-aos-delay="700" src="assets/img/hero-illustration.svg" alt="Vector representing a Designer using Part Number Generator to improve his efficiency">
-    </section>
+    </header>
+
+    <!-- Main Generator Section -->
     <main id="generator">
+        <!-- Generation Types -->
         <main class="generation__types" data-aos="fade-right" data-aos-duration="800">
+
+            <!-- Sequential Generation Type -->
             <section class="generation__type" id="generate__sequential">
+                <!-- Main Content -->
                 <div class="main">
                     <div class="type__title">
                         <span class="type__title__text">Sequential</span>
@@ -64,7 +78,8 @@
                                 The Base Number entered below will increment automatically each time you copy your Part Number
                             </p>
                         </div>
-                        
+
+                        <!-- Sequential Inputs -->
                         <div class="generation__type__inputs">
                             <div class="input__block">
                                 <label class="input__label" for="sequential__prefix">Prefix</label>
@@ -83,17 +98,23 @@
                                 <button class="reset__button" onclick="reset(this.parentElement.parentElement)">Reset</button>
                             </div>
                         </div>
+
+                        <!-- Sequential Outputs -->
                         <div class="generation__type__outputs">
                             <div class="output" id="sequential__output">
                                 <div class="prefix__output"></div>
                                 <div class="output__number"></div>
                                 <div class="suffix__output"></div>
                             </div>
-                            <button class="copy__btn" onclick="copyToClipboard(this);incrementBaseNumber();">
-                                <img class="copy-button__icon" src="assets/img/copy-icon.svg" alt="Copy to Clipboard Illustration">
+                            <!-- Copy Button -->
+                            <button class="copy__btn" onclick="copyToClipboard(this); incrementBaseNumber();">
+                                <img class="copy__btn__icon" src="assets/img/copy-icon.svg" alt="Copy to Clipboard Illustration">
                             </button>
                         </div>
+                        <!-- Error/Confirmation Message -->
                         <div class="message"></div>
+
+                        <!-- Recently Copied Value and Time -->
                         <div class="recently__copied__text">
                             <div class="recently__copied__value">
                                 <div class="prefix__output"></div>
@@ -104,12 +125,21 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Sequential Fun Fact -->
                 <div class="fun__fact">
                     <div class="fun__fact__heading"><span class="fun__fact__text">Fun Fact</span></div>
-                    <p class="fun__fact__content"><span class="fun__fact__text">This is my Part Number. There are many like it, but this one is mine.</span></p>
+                    <p class="fun__fact__content">
+                        <span class="fun__fact__text">
+                            This is my Part Number. There are many like it, but this one is mine.
+                        </span>
+                    </p>
                 </div>
             </section>
+
+            <!-- Time Generation Type -->
             <section class="generation__type" id="generate__time">
+                <!-- Main Content -->
                 <div class="main">
                     <div class="type__title">
                         <span class="type__title__text">Time</span>
@@ -123,6 +153,8 @@
                                 until 2038
                             </p>
                         </div>
+
+                        <!-- Time Type Inputs -->
                         <div class="generation__type__inputs">
                             <div class="input__block">
                                 <label class="input__label" for="time__prefix">Prefix</label>
@@ -137,6 +169,8 @@
                                 <button class="reset__button" onclick="reset(this.parentElement.parentElement)">Reset</button>
                             </div>
                         </div>
+
+                        <!-- Time Type Outputs -->
                         <div class="generation__type__outputs">
                             <div class="output" id="time__output">
                                 <div class="prefix__output"></div>
@@ -144,10 +178,14 @@
                                 <div class="suffix__output"></div>
                             </div>
                             <button class="copy__btn" onclick="copyToClipboard(this)">
-                                <img class="copy-button__icon" src="assets/img/copy-icon.svg" alt="Copy to Clipboard Illustration">
+                                <img class="copy__btn__icon" src="assets/img/copy-icon.svg" alt="Copy to Clipboard Illustration">
                             </button>
                         </div>
+
+                        <!-- Error/Confirmation Message -->
                         <div class="message"></div>
+
+                        <!-- Recently Copied Value and Time -->
                         <div class="recently__copied__text">
                             <div class="recently__copied__value">
                                 <div class="prefix__output"></div>
@@ -158,12 +196,20 @@
                         </div>
                     </div>
                 </div>
+                <!-- Time Type Fun Fact -->
                 <div class="fun__fact">
                     <div class="fun__fact__heading"><span class="fun__fact__text">Fun Fact</span></div>
-                    <p class="fun__fact__content"><span class="fun__fact__text">Computers have been using this clock since the Unix epoch began at 00:00:00 UTC on January 1, 1970</span></p>
+                    <p class="fun__fact__content">
+                        <span class="fun__fact__text">
+                            Computers have been using this clock since the Unix epoch began at 00:00:00 UTC on January 1, 1970
+                        </span>
+                    </p>
                 </div>
             </section>
+
+            <!-- Random Generation Type -->
             <section class="generation__type" id="generate__random">
+                <!-- Main Content -->
                 <div class="main">
                     <div class="type__title">
                         <span class="type__title__text">Random</span>
@@ -171,12 +217,14 @@
                     <div class="type__content">
                         <div class="generation__type__text">
                             <h1 class="generation__type__heading">
-                                Generate a new unique number 
+                                Generate a new unique number
                             </h1>
                             <p class="generation__type__description">
                                 every time it is copied to clipboard
                             </p>
                         </div>
+
+                        <!-- Random Type Inputs -->
                         <div class="generation__type__inputs">
                             <div class="input__block">
                                 <label class="input__label" for="random__prefix">Prefix</label>
@@ -201,16 +249,20 @@
                                 <button class="reset__button" onclick="reset(this.parentElement.parentElement)">Reset</button>
                             </div>
                         </div>
+
+                        <!-- Random Type Outputs -->
                         <div class="generation__type__outputs">
                             <div class="output" id="random__output">
                                 <div class="prefix__output"></div>
                                 <div class="output__number"></div>
                                 <div class="suffix__output"></div>
                             </div>
-                            <button class="copy__btn" onclick="copyToClipboard(this);updateRandomCharacters();">
-                                <img class="copy-button__icon" src="assets/img/copy-icon.svg" alt="Copy to Clipboard Illustration">
+                            <button class="copy__btn" onclick="copyToClipboard(this); updateRandomCharacters();">
+                                <img class="copy__btn__icon" src="assets/img/copy-icon.svg" alt="Copy to Clipboard Illustration">
                             </button>
                         </div>
+
+                        <!-- Error/Confirmation Message -->
                         <div class="message"></div>
                         <div class="recently__copied__text">
                             <div class="recently__copied__value">
@@ -222,26 +274,43 @@
                         </div>
                     </div>
                 </div>
+                <!-- Random Type Fun Fact -->
                 <div class="fun__fact repetition__chance">
                     <div class="fun__fact__heading"><span class="fun__fact__text">Fun Fact</span></div>
-                    <p class="fun__fact__content"><span class="fun__fact__text">With <span class="fun__character__count"></span> random characters, there is a 1 in <span class="fun__total__count"></span> chance that the same combination will be repeated twice</span></p>
+                    <p class="fun__fact__content">
+                        <span class="fun__fact__text">
+                            With
+                            <span class="fun__character__count"></span> 
+                            random digits
+                            <span class="if__letters"></span>,
+                            there is a 1 in 
+                            <span class="fun__total__count"></span> 
+                            chance that the same combination will be repeated twice!
+                        </span>
+                    </p>
                 </div>
             </section>
         </main>
+
+        <!-- Explanation -->
         <div class="instructions" data-aos="fade-left" data-aos-duration="800">
             <h2 id="explanation__heading">Here's How It Works</h2>
             <div id="explanation__content">
                 <p>We provide an easy way for your entire team to generate unique numbers for your files.</p>
-                <p>Because a new number is generated every second or at random, everybody in your team can use
-                    PartNumberGenerator.com with minimal possibility of duplicating a file name.</p>
+                <p>Because a new number is generated every second or at random, everybody in your team can use PartNumberGenerator.com with minimal possibility of duplicating a file name.</p>
                 <p>To further prevent duplication, each team member can adjust the input variables provided!</p>
             </div>
         </div>
     </main>
+
+    <!-- Footer Section -->
     <footer>
         <p class="copyright">© <span class="current__year"></span> PartNumberGenerator.com</p>
         <div id="contact">
-            Need Help? Email us at <a href="mailto:contact@partnumbergenerator.com" class="email">contact@partnumbergenerator.com</a>
+            Need Help? Email us at 
+            <a href="mailto:contact@partnumbergenerator.com" class="email">
+                contact@partnumbergenerator.com
+            </a>
         </div>
     </footer>
 </body>
