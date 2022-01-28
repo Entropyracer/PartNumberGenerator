@@ -38,6 +38,7 @@ function updateTime() {
 
 setInterval(updateTime, 1000);
 
+// Update Current Input Value in Output
 function updateValues(input, classList) {
     let root = input.parentElement.parentElement.parentElement.parentElement.parentElement;
     if (classList.includes("prefix") || classList.includes("suffix")) {
@@ -45,16 +46,20 @@ function updateValues(input, classList) {
         root.querySelector(`.${identifier}__output`).textContent = input.value;
     }
 }
+
+// Update Random Characters in Output
 function updateRandomCharacters() {
   let length = document.querySelector("#random__characters").value;
   document.querySelector("#generate__random .output__number").textContent = generateRandomAlphanumerics(length);
   funFact();
   updateWebStorage(); 
 }
+
+// Update Base Number in Output (Do not Increment)
 function updateBaseNumber() {
   document.querySelector("#generate__sequential .output__number").textContent = baseNumberInput.value;
   updateWebStorage();
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 function incrementBaseNumber() {
     let baseNumber = `${baseNumberInput.value}`,
         i = 0;
@@ -206,7 +211,7 @@ function populateFields() {
     document.querySelector("#sequential__prefix").value = savedValues.sequential.prefix || "PREFIX";
     document.querySelector("#sequential__suffix").value = savedValues.sequential.suffix || "SUFFIX";
     document.querySelector("#base__number").value = savedValues.sequential.baseNumber || "000001";
-    if (savedValues.sequential.recentlyCopied.time !== "") {
+    if (savedValues.sequential.recentlyCopied.time !== "" && savedValues.sequential.recentlyCopied.prefix !== "" && savedValues.sequential.recentlyCopied.suffix !== "" ) {
       document.querySelector("#generate__sequential .recently__copied__text").innerHTML = `
       <div class="recently__copied__value">
         <div class="prefix__output">${savedValues.sequential.recentlyCopied.prefix}</div>
@@ -219,7 +224,7 @@ function populateFields() {
     }
     document.querySelector("#time__prefix").value = savedValues.time.prefix || "PREFIX";
     document.querySelector("#time__suffix").value = savedValues.time.suffix || "SUFFIX";
-    if (savedValues.time.recentlyCopied.time !== "") {
+    if (savedValues.time.recentlyCopied.time !== "" && savedValues.time.recentlyCopied.prefix !== "" && savedValues.time.recentlyCopied.suffix !== "" ) {
       document.querySelector("#generate__time .recently__copied__text").innerHTML = `
       <div class="recently__copied__value">
         <div class="prefix__output">${savedValues.time.recentlyCopied.prefix}</div>
@@ -234,7 +239,7 @@ function populateFields() {
     document.querySelector("#random__suffix").value = savedValues.random.suffix || "SUFFIX";
     document.querySelector("#random__characters").value = savedValues.random.randomCharacters || 7;
     document.querySelector("#letters").checked = savedValues.random.includeLetters || false;
-    if (savedValues.sequential.recentlyCopied.time !== "") {
+    if (savedValues.random.recentlyCopied.time !== "" && savedValues.random.recentlyCopied.prefix !== "" && savedValues.random.recentlyCopied.suffix !== "" ) {
       document.querySelector("#generate__random .recently__copied__text").innerHTML = `
       <div class="recently__copied__value">
         <div class="prefix__output">${savedValues.random.recentlyCopied.prefix}</div>
