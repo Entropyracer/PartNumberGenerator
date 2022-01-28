@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Metadata Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Welcome to PartNumberGenerator.com, an easy way for your entire team to generate unique numbers for your files. Everybody in your team can use this tool without worrying about duplicating a file name. ">
+    <meta name="keywords" content="Engineering, Manufacturing, CAD, Solidworks, ProE, PartNumberGenerator">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="title" content="Part Number Generator">
+    <title>PartNumberGenerator</title>
+    <!-- Favicon Configuration Tags -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon-16x16.png">
+    <link rel="mask-icon" href="assets/img/favicon/safari-pinned-tab.svg" color="#3455fd">
+    <meta name="msapplication-TileColor" content="#3455fd">
+    <meta name="theme-color" content="#3455fd">
+    <link rel="manifest" href="manifest.json">
+    <!-- Animate On Scroll CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <!-- Main Script -->
+    <script src="assets/scripts/main.js" type="application/javascript" defer></script>
+</head>
+
+<body>
+    <section id="preloader">
+        <img class="preloader__image" src="assets/img/favicon/android-chrome-512x512.png" alt="PartNumberGenerator Logo">
+        <div class="preloader__container">
+            <span class="preloader__circle"></span>
+            <span class="preloader__circle"></span>
+            <span class="preloader__circle"></span>
+            <span class="preloader__circle"></span>
+        </div>
+    </section>
+    <section id="hero">
+        <div id="hero__content" data-aos="fade-right" data-aos-duration="800" data-aos-delay="800">
+            <h1 id="hero__heading">Welcome to <br> PartNumberGenerator<span class="color--light">.com</span></h1>
+            <p id="hero__tagline" data-aos="fade-down" data-aos-duration="800" data-aos-delay="1000">Simplifying your CAD Workflow!</p>
+        </div>
+        <img id="hero__illustration" data-aos="fade-left" data-aos-duration="800" data-aos-delay="700" src="assets/img/hero-illustration.svg" alt="Vector representing a Designer using Part Number Generator to improve his efficiency">
+    </section>
+    <main id="generator">
+        <main class="generation__types" data-aos="fade-right" data-aos-duration="800">
+            <section class="generation__type" id="generate__sequential">
+                <div class="main">
+                    <div class="type__title">
+                        <span class="type__title__text">Sequential</span>
+                    </div>
+                    <div class="type__content">
+                        <div class="generation__type__text">
+                            <h1 class="generation__type__heading">
+                                Generate part numbers sequentially
+                            </h1>
+                            <p class="generation__type__description">
+                                The Base Number entered below will increment automatically each time you copy your Part Number
+                            </p>
+                        </div>
+                        
+                        <div class="generation__type__inputs">
+                            <div class="input__block">
+                                <label class="input__label" for="sequential__prefix">Prefix</label>
+                                <input class="input prefix" id="sequential__prefix" type="text" maxlength="10" value="PREFIX">
+                            </div>
+                            <div class="input__block">
+                                <label class="input__label" for="sequential__suffix">Suffix</label>
+                                <input class="input suffix" id="sequential__suffix" type="text" maxlength="10" value="SUFFIX">
+                            </div>
+                            <div class="input__block">
+                                <label class="input__label" for="base__number">Base Number</label>
+                                <input class="input" id="base__number" type="text" maxlength="30" value="000001">
+                            </div>
+                            <div class="configuration__container">
+                                <span></span>
+                                <button class="reset__button" onclick="reset(this.parentElement.parentElement)">Reset</button>
+                            </div>
+                        </div>
+                        <div class="generation__type__outputs">
+                            <div class="output" id="sequential__output">
+                                <div class="prefix__output"></div>
+                                <div class="output__number"></div>
+                                <div class="suffix__output"></div>
+                            </div>
+                            <button class="copy__btn" onclick="copyToClipboard(this);incrementBaseNumber();">
+                                <img class="copy-button__icon" src="assets/img/copy-icon.svg" alt="Copy to Clipboard Illustration">
+                            </button>
+                        </div>
+                        <div class="message"></div>
+                        <div class="recently__copied__text">
+                            <div class="recently__copied__value">
+                                <div class="prefix__output"></div>
+                                <div class="output__number"></div>
+                                <div class="suffix__output"></div>
+                            </div>
+                            <span class="recently__copied__time"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fun__fact">
+                    <div class="fun__fact__heading"><span class="fun__fact__text">Fun Fact</span></div>
+                    <p class="fun__fact__content"><span class="fun__fact__text">This is my Part Number. There are many like it, but this one is mine.</span></p>
+                </div>
+            </section>
+            <section class="generation__type" id="generate__time">
+                <div class="main">
+                    <div class="type__title">
+                        <span class="type__title__text">Time</span>
+                    </div>
+                    <div class="type__content">
+                        <div class="generation__type__text">
+                            <h1 class="generation__type__heading">
+                                Generate a new number every second
+                            </h1>
+                            <p class="generation__type__description">
+                                until 2038
+                            </p>
+                        </div>
+                        <div class="generation__type__inputs">
+                            <div class="input__block">
+                                <label class="input__label" for="time__prefix">Prefix</label>
+                                <input class="input prefix" id="time__prefix" type="text" maxlength="10" value="PREFIX">
+                            </div>
+                            <div class="input__block">
+                                <label class="input__label" for="time__suffix">Suffix</label>
+                                <input class="input suffix" id="time__suffix" type="text" maxlength="10" value="SUFFIX">
+                            </div>
+                            <div class="configuration__container">
+                                <span></span>
+                                <button class="reset__button" onclick="reset(this.parentElement.parentElement)">Reset</button>
+                            </div>
+                        </div>
+                        <div class="generation__type__outputs">
+                            <div class="output" id="time__output">
+                                <div class="prefix__output"></div>
+                                <div class="output__number"></div>
+                                <div class="suffix__output"></div>
+                            </div>
+                            <button class="copy__btn" onclick="copyToClipboard(this)">
+                                <img class="copy-button__icon" src="assets/img/copy-icon.svg" alt="Copy to Clipboard Illustration">
+                            </button>
+                        </div>
+                        <div class="message"></div>
+                        <div class="recently__copied__text">
+                            <div class="recently__copied__value">
+                                <div class="prefix__output"></div>
+                                <div class="output__number"></div>
+                                <div class="suffix__output"></div>
+                            </div>
+                            <span class="recently__copied__time"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fun__fact">
+                    <div class="fun__fact__heading"><span class="fun__fact__text">Fun Fact</span></div>
+                    <p class="fun__fact__content"><span class="fun__fact__text">Computers have been using this clock since the Unix epoch began at 00:00:00 UTC on January 1, 1970</span></p>
+                </div>
+            </section>
+            <section class="generation__type" id="generate__random">
+                <div class="main">
+                    <div class="type__title">
+                        <span class="type__title__text">Random</span>
+                    </div>
+                    <div class="type__content">
+                        <div class="generation__type__text">
+                            <h1 class="generation__type__heading">
+                                Generate a new unique number 
+                            </h1>
+                            <p class="generation__type__description">
+                                every time it is copied to clipboard
+                            </p>
+                        </div>
+                        <div class="generation__type__inputs">
+                            <div class="input__block">
+                                <label class="input__label" for="random__prefix">Prefix</label>
+                                <input class="input prefix" id="random__prefix" type="text" maxlength="10" value="PREFIX">
+                            </div>
+                            <div class="input__block">
+                                <label class="input__label" for="random__suffix">Suffix</label>
+                                <input class="input suffix" id="random__suffix" type="text" maxlength="10" value="SUFFIX">
+                            </div>
+                            <div class="input__block">
+                                <label class="input__label" for="random__characters">Random Characters</label>
+                                <input class="input" id="random__characters" type="number" max="30" value="7">
+                            </div>
+                            <div class="configuration__container">
+                                <div class="checkbox__container">
+                                    <input type="checkbox" id="letters">
+                                    <label for="letters" class="input__label">
+                                        <span class="checkbox"></span>
+                                        <span class="checkbox__text">Include Letters?</span>
+                                    </label>
+                                </div>
+                                <button class="reset__button" onclick="reset(this.parentElement.parentElement)">Reset</button>
+                            </div>
+                        </div>
+                        <div class="generation__type__outputs">
+                            <div class="output" id="random__output">
+                                <div class="prefix__output"></div>
+                                <div class="output__number"></div>
+                                <div class="suffix__output"></div>
+                            </div>
+                            <button class="copy__btn" onclick="copyToClipboard(this);updateRandomCharacters();">
+                                <img class="copy-button__icon" src="assets/img/copy-icon.svg" alt="Copy to Clipboard Illustration">
+                            </button>
+                        </div>
+                        <div class="message"></div>
+                        <div class="recently__copied__text">
+                            <div class="recently__copied__value">
+                                <div class="prefix__output"></div>
+                                <div class="output__number"></div>
+                                <div class="suffix__output"></div>
+                            </div>
+                            <span class="recently__copied__time"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="fun__fact repetition__chance">
+                    <div class="fun__fact__heading"><span class="fun__fact__text">Fun Fact</span></div>
+                    <p class="fun__fact__content"><span class="fun__fact__text">With <span class="fun__character__count"></span> random characters, there is a 1 in <span class="fun__total__count"></span> chance that the same combination will be repeated twice</span></p>
+                </div>
+            </section>
+        </main>
+        <div class="instructions" data-aos="fade-left" data-aos-duration="800">
+            <h2 id="explanation__heading">Here's How It Works</h2>
+            <div id="explanation__content">
+                <p>We provide an easy way for your entire team to generate unique numbers for your files.</p>
+                <p>Because a new number is generated every second or at random, everybody in your team can use
+                    PartNumberGenerator.com with minimal possibility of duplicating a file name.</p>
+                <p>To further prevent duplication, each team member can adjust the input variables provided!</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p class="copyright">© <span class="current__year"></span> PartNumberGenerator.com</p>
+        <div id="contact">
+            Need Help? Email us at <a href="mailto:contact@partnumbergenerator.com" class="email">contact@partnumbergenerator.com</a>
+        </div>
+    </footer>
+</body>
+
+</html>
