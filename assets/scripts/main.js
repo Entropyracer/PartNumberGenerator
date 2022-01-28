@@ -23,10 +23,13 @@ for (i = 0; i < inputs.length; i++) {
     updateValues(inputs[i], Array.from(inputs[i].classList));
 
     // Validating Inputs and Updating Output on any further change to the Inputs
-    inputs[i].onkeyup = inputs[i].onchange = (e) => {
-        e.target.value = e.target.value.toUpperCase();
-        validate(e);
+    inputs[i].onkeyup = (e) => {
         updateValues(e.target, Array.from(e.target.classList));
+    }
+    inputs[i].onchange = (e) => {
+      e.target.value = e.target.value.toUpperCase();
+      validate(e);
+      updateValues(e.target, Array.from(e.target.classList));
     }
 }
 
