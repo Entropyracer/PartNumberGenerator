@@ -322,7 +322,7 @@ button {
 }
 
 .fun__fact__content {
-  background-color: var(--yellow);
+  background-color: var(--light-gray);
   color: var(--black);
   opacity: .9;
   border-bottom-right-radius: 1rem;
@@ -330,7 +330,7 @@ button {
   display: block;
   line-height: 1.5;
   width: calc(100% - 5rem);
-  padding: 0 1rem;
+  padding: .5rem 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
