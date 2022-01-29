@@ -66,8 +66,8 @@ function updateBaseNumber() {
 function incrementBaseNumber() {
     let baseNumber = `${baseNumberInput.value}`,
         i = 0;
-        while (baseNumber[i] === '0') i++;
-        let incremented = `${"0".repeat(i)}${BigInt(baseNumber) + 1n}`;
+    while (baseNumber[i] === '0') i++;
+    let incremented = `${"0".repeat(i)}${BigInt(baseNumber) + 1n}`;
     while (incremented.length > baseNumber.length) {
         if (incremented[0] !== "0") break;
         incremented = incremented.substring(1);
@@ -77,7 +77,7 @@ function incrementBaseNumber() {
     updateWebStorage();
 }
 
-baseNumberInput.onchange = (e) =>  {validate(e);updateBaseNumber(); };
+baseNumberInput.onchange = (e) =>  {validate(e);updateBaseNumber();};
 updateBaseNumber();
 updateRandomCharacters();
 
