@@ -126,7 +126,6 @@ function copyToClipboard(button) {
     let d = new Date(),
     date = d.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
     time = d.toLocaleTimeString("en-US", {hour: '2-digit', minute:'2-digit', second: "2-digit"});
-    console.log(date, time);
   if (navigator.clipboard) {
     navigator.clipboard.writeText(text);
     messageDOM.textContent = "Copied!";
